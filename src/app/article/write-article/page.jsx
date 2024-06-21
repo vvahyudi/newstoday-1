@@ -22,7 +22,7 @@ const WriteArticlePage = () => {
 	const { data, isLoading } = useCategoryListQuery(params)
 	const [form, setForm] = useState({
 		title: "",
-		category: "",
+		categoryId: "",
 		body: "",
 		banner: null,
 		tags: "",
@@ -46,7 +46,7 @@ const WriteArticlePage = () => {
 		e.preventDefault()
 		const formData = new FormData()
 		formData.append("title", form.title)
-		formData.append("category", form.category)
+		formData.append("categoryId", form.categoryId)
 		formData.append("body", form.body)
 		formData.append("banner", form.banner)
 		formData.append("tags", form.tags)

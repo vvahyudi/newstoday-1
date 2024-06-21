@@ -1,7 +1,7 @@
-// import { CardArticle } from "../molecules/CardArticle"
+import React from "react"
 import { nunitoBold } from "@/styles/font"
 
-const CategoryGovernment = ({ children, title }) => {
+const CategoryContent = ({ title, children }) => {
 	return (
 		<section className="flex flex-col w-full p-10 gap-4 ">
 			<div className="flex justify-between">
@@ -9,11 +9,11 @@ const CategoryGovernment = ({ children, title }) => {
 					{title}
 				</h2>
 			</div>
-			<div className="grid grid-cols-1 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 place-items-center">
+			<div className="grid grid-cols-1 xs:grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-10 ">
 				{children}
 			</div>
 		</section>
 	)
 }
 
-export default CategoryGovernment
+export default CategoryContent

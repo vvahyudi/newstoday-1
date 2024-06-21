@@ -25,11 +25,12 @@ const Navbar = ({ src }) => {
 			{token ? (
 				<div className="navbar bg-white border-b-2 border-bggray mb-8">
 					<div className="navbar-start flex-1 w-1/3">
-						<a
-							className={`${georgiaBold.className} btn btn-ghost normal-case text-4xl text-textprimary`}
+						<Link
+							href={`/`}
+							className={`${georgiaBold.className} normal-case text-3xl md:text-4xl text-textprimary`}
 						>
 							News Today
-						</a>
+						</Link>
 					</div>
 					<div className="flex-1 w-1/3 navbar-center hidden lg:flex">
 						<ul
@@ -73,16 +74,18 @@ const Navbar = ({ src }) => {
 									</div>
 								) : (
 									<div className="w-10 rounded-full">
-										<Image
-											alt="Profile Picture"
-											src={
-												data.data.picture === ""
-													? `/avatar-placeholder.png`
-													: data.data.picture
-											}
-											width={100}
-											height={100}
-										/>
+										{data ? (
+											<Image
+												alt="Profile Picture"
+												src={
+													data.data.picture === ""
+														? `/avatar-placeholder.png`
+														: data.data.picture
+												}
+												width={100}
+												height={100}
+											/>
+										) : null}
 									</div>
 								)}
 							</div>
@@ -96,6 +99,21 @@ const Navbar = ({ src }) => {
 										<span className="badge">New</span>
 									</Link>
 								</li>
+								<li>
+									<Link href={`/home`}>Home</Link>
+								</li>
+
+								<li>
+									<Link href={`/article`}>Articles</Link>
+								</li>
+								<li>
+									<Link href={`/category`}>Category</Link>
+								</li>
+
+								<li>
+									<a>About</a>
+								</li>
+
 								<li>
 									<button onClick={handleLogout}>Logout</button>
 								</li>

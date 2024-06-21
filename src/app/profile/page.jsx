@@ -1,25 +1,16 @@
 "use client"
 import CardProfileInfo from "@/components/molecules/CardProfileInfo"
 import Navbar from "@/components/organisms/Navbar"
-import {
-	nunitoBlack,
-	nunitoBase,
-	nunitoBold,
-	nunitoMedium,
-} from "@/styles/font"
 import Image from "next/image"
 import React from "react"
-import { Icon } from "@iconify/react"
 import { useDetailProfileQuery } from "@/hooks/useProfileQuery"
 import Footer from "@/components/organisms/Footer"
-import Hero from "@/components/organisms/Hero"
 import ProfileHeader from "@/components/molecules/ProfileHeader"
-import SectionLatest from "@/components/organisms/SectionLatest"
 import Link from "next/link"
+import SectionArticleByUser from "@/components/organisms/SectionArticleByUser"
 
 const ProfilePage = () => {
 	const { data, isLoading } = useDetailProfileQuery()
-	console.log(data)
 	return (
 		<>
 			<Navbar />
@@ -41,6 +32,7 @@ const ProfilePage = () => {
 							width={1000}
 							height={100}
 							className="object-cover w-full h-60"
+							priority
 						/>
 
 						{/* start CardProfile Component */}
@@ -61,18 +53,26 @@ const ProfilePage = () => {
 							/>
 							<div className="flex md:flex-row flex-col  text-white md:gap-2 gap-4 pt-8 md:pt-0">
 								<div className="flex flex-col justify-end ">
-									<button className="btn btn-wide bg-blueprimary">
+									<button className="btn btn-wide bg-blueprimary hover:bg-blueprimary/85">
 										Message
 									</button>
 								</div>
 								<div className="flex flex-col justify-end">
-									<button className="btn btn-wide bg-textprimary">
+									<Link
+										className="btn btn-wide bg-textprimary hover:bg-textprimary/85"
+										href={`article/write-article`}
+									>
+										Create Article
+									</Link>
+								</div>
+								<div className="flex flex-col justify-end">
+									<button className="btn btn-wide bg-textprimary hover:bg-textprimary/85">
 										Following
 									</button>
 								</div>
 								<div className="flex flex-col justify-end">
 									<Link
-										className="btn btn-wide bg-textprimary"
+										className="btn btn-wide bg-textprimary hover:bg-textprimary/85"
 										href={`profile/edit-profile/${data.data.id}`}
 									>
 										Edit
@@ -80,11 +80,10 @@ const ProfilePage = () => {
 								</div>
 							</div>
 						</div>
-						{/* end CardProfile Component */}
 					</div>
 				</>
 			)}
-			<SectionLatest />
+			<SectionArticleByUser />
 			<Footer />
 		</>
 	)

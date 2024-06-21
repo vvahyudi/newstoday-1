@@ -25,7 +25,9 @@ const CategoryPage = () => {
 					18 Categories
 				</h3>
 			</div>
-			<SectionCategory1 />
+			<SectionCategory1
+			// textClick={`Click the category to explore articles`}
+			/>
 			<Footer />
 		</>
 	)

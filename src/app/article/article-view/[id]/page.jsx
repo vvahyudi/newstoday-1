@@ -3,7 +3,7 @@ import ArticleHeader from "@/components/molecules/ArticleHeader"
 import CardImageArticle from "@/components/molecules/CardImageArticle"
 import Image from "next/image"
 import Navbar from "@/components/organisms/Navbar"
-import React, { useEffect, useState } from "react"
+
 import SectionAvatar from "@/components/organisms/SectionAvatar"
 // import ArticleContent from "@/components/organisms/ArticleContent"
 import SectionComment from "@/components/organisms/SectionComment"
@@ -31,7 +31,7 @@ export default function ArticleViewPage() {
 				</div>
 			) : (
 				<section className="flex flex-col justify-center px-20 py-10 w-full">
-					<ArticleHeader />
+					<ArticleHeader page_name={`Article Viewer`} />
 					<CardImageArticle>
 						<Image
 							src={`${data.data.banner}`}

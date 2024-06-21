@@ -25,7 +25,7 @@ const SectionRecommended = () => {
 				</h3>
 			</div>
 			{/* {JSON.stringify(data)} */}
-			<div className="flex gap-8 w-full carousel carousel-center  no-scrollbar p-3">
+			<div className="gap-8 carousel no-scrollbar p-3">
 				{isLoading ? (
 					<div>Loading ...</div>
 				) : (
@@ -34,7 +34,27 @@ const SectionRecommended = () => {
 							return (
 								<Link key={i} href={`/article/article-view/${e.id}`}>
 									<CardArticle
-										className={`carousel-item card  h-44 md:h-52 card-side shadow-md bg-bggray`}
+										className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
+										src={e.banner}
+										title={e.title.substr(0, 15)}
+										description={e.title.substr(0, 90)}
+										like={e.like}
+										publishDate={`3m ago`}
+									/>
+								</Link>
+							)
+						}
+					})
+				)}
+				{isLoading ? (
+					<div>Loading ...</div>
+				) : (
+					data.data.map((e, i) => {
+						if (e.category.title === "Sport") {
+							return (
+								<Link key={i} href={`/article/article-view/${e.id}`}>
+									<CardArticle
+										className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
 										src={e.banner}
 										title={e.title.substr(0, 15)}
 										description={e.title.substr(0, 90)}

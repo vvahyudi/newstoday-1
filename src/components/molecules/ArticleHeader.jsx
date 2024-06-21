@@ -1,6 +1,6 @@
 import { nunitoBold } from "@/styles/font"
 import { Icon } from "@iconify/react"
-const ArticleHeader = () => {
+const ArticleHeader = ({ page_name }) => {
 	return (
 		<div className="flex justify-between w-full">
 			<div className="flex items-center justify-start">
@@ -11,7 +11,7 @@ const ArticleHeader = () => {
 				<h3 className={`${nunitoBold.className} text-black text-lg`}>Back</h3>
 			</div>
 			<h2 className={`${nunitoBold.className} text-black text-2xl`}>
-				Article Viewer
+				{page_name}
 			</h2>
 			<Icon icon="bi:send" className="text-black w-9 h-9 font-bold" />
 		</div>

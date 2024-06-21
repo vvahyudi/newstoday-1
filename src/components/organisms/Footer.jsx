@@ -1,3 +1,4 @@
+"use client"
 import { nunitoBlack } from "@/styles/font"
 
 const Footer = () => {

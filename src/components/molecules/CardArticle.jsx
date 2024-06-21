@@ -10,19 +10,21 @@ export const CardArticle = ({
 	description,
 	like,
 	publishDate,
+	children,
 }) => {
 	return (
 		<div className={className}>
 			<figure>
 				<Image
+					priority
 					src={src}
-					width={200}
-					height={200}
+					width={500}
+					height={500}
 					alt={alt}
-					className="object-cover rounded-lg h-52"
+					className="object-cover rounded-lg w-40 h-52"
 				/>
 			</figure>
-			<div className="card-body">
+			<div className="w-72 card-body">
 				<h2 className="card-title text-blueprimary text-base md:text-base lg:text-lg text-wrap">
 					{title}
 				</h2>
@@ -59,6 +61,7 @@ export const CardArticle = ({
 						/>
 					</div>
 				</div>
+				{children}
 			</div>
 		</div>
 	)

@@ -27,7 +27,7 @@ const Home = () => {
 			</Hero>
 			<SectionTags />
 			<SectionCategory1
-				moreCategory={"Click the category to explore articles"}
+			// moreCategory={"Click the category to explore articles"}
 			/>
 			<SectionRecommended />
 			<SectionVideo />

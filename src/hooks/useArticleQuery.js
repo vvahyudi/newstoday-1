@@ -1,4 +1,9 @@
-import { getAllArticle, getArticleById } from "@/api/article"
+import {
+	getAllArticle,
+	getArticleById,
+	getArticleByUser,
+	getLatestArticle,
+} from "@/api/article"
 import { useQuery } from "@tanstack/react-query"
 
 export const useArticleListQuery = (params) => {
@@ -8,9 +13,23 @@ export const useArticleListQuery = (params) => {
 	})
 }
 
-export const useArticleByIdQuery = (params) => {
+export const useArticleByIdQuery = (id) => {
 	return useQuery({
 		queryKey: ["article-detail"],
-		queryFn: async () => await getArticleById(params),
+		queryFn: async () => await getArticleById(id),
+	})
+}
+
+export const useArticleByUserQuery = () => {
+	return useQuery({
+		queryKey: ["my-article"],
+		queryFn: async () => await getArticleByUser(),
+	})
+}
+
+export const useLatestArticleQuery = (params) => {
+	return useQuery({
+		queryKey: ["latest-article"],
+		queryFn: async () => await getLatestArticle(params),
 	})
 }
