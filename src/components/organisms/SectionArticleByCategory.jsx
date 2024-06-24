@@ -4,6 +4,7 @@ import { useArticleListQuery } from "@/hooks/useArticleQuery"
 // import { useCategoryListQuery } from "@hooks/useCategoryQuery"
 import { useState } from "react"
 import { useParams } from "next/navigation"
+import Link from "next/link"
 const SectionArticleByCategory = () => {
 	const [params, setParams] = useState({
 		limit: 10,
@@ -20,35 +21,41 @@ const SectionArticleByCategory = () => {
 		<section className="flex flex-col w-full p-10 gap-4">
 			<div className="flex justify-between">
 				<h2 className={`${nunitoBold.className} text-lg md:text-2xl`}>
-					{/* Sport */}
-					{/* {if (data<0){
-
-					}} */}
-					{isLoading ? `Loading ...` : `${id}`}
+					{isLoading
+						? "Loading ..."
+						: data &&
+						  data.data &&
+						  data.data.some((article) => article.category.id === id)
+						? data.data.find((article) => article.category.id === id).category
+								.title
+						: null}
 				</h2>
-				<h3
+				{/* <h3
 					className={`text-sm md:text-lg text-blueprimary ${nunitoMedium.className}`}
 				>
 					More
-				</h3>
+				</h3> */}
 			</div>
 			<div className="w-full grid grid-cols-1 place-items-center md:grid-cols-2 lg:grid-cols-3 gap-6">
 				{isLoading ? (
 					<div>Loading ...</div>
 				) : (
 					data.data.map((e, i) => {
+						const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+						const descriptionPreview = e.body.split(" ").slice(0, 10).join(" ")
 						if (e.category.id === id) {
 							return (
-								<CardArticle
-									key={i}
-									className={`carousel-item card w-full h-36 md:h-52 card-side shadow-md bg-bggray`}
-									src={e.banner}
-									alt={e.title}
-									title={e.title.substr(0, 15)}
-									description={e.title.substr(0, 90)}
-									like={e.like}
-									publishDate={`3m ago`}
-								/>
+								<Link key={i} href={`/article/article-view/${e.id}`}>
+									<CardArticle
+										className={`carousel-item card w-full h-36 md:h-52 card-side shadow-md bg-bggray`}
+										src={e.banner}
+										alt={e.title}
+										title={titlePreview}
+										description={descriptionPreview}
+										like={e.like}
+										publishDate={`3m ago`}
+									/>
+								</Link>
 							)
 						}
 					})

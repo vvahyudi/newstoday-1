@@ -49,111 +49,6 @@ const ArticlePage = () => {
 				</button>
 			</Hero>
 			<FilterButton />
-			{/* {JSON.stringify(data)} */}
-			{/* <CategoryArticle>
-				<CategoryGovernment>
-					{isLoading ? (
-						<div className="flex items-center w-full justify-center">
-							<span className="loading loading-spinner loading-lg"></span>
-						</div>
-					) : (
-						data.data.map((e, i) => {
-							if (e.category.title === "Government") {
-								return (
-									<Link key={i} href={`/article/article-view/${e.id}`}>
-										<CardArticle
-											className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
-											src={e.banner}
-											title={e.title.substr(0, 15)}
-											description={e.title.substr(0, 90)}
-											like={e.like}
-											publishDate={`3m ago`}
-										/>
-									</Link>
-								)
-							}
-						})
-					)}
-				</CategoryGovernment>
-				<CategoryTodays>
-					{isLoading ? (
-						<div className="flex items-center w-full justify-center">
-							<span className="loading loading-spinner loading-lg"></span>
-						</div>
-					) : (
-						data.data.map((e, i) => {
-							if (e.category.title === "Todays") {
-								return (
-									<Link key={i} href={`/article/article-view/${e.id}`}>
-										<CardArticle
-											className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
-											src={e.banner}
-											title={e.title.substr(0, 15)}
-											description={e.title.substr(0, 90)}
-											like={e.like}
-											publishDate={`3m ago`}
-										/>
-									</Link>
-								)
-							}
-						})
-					)}
-				</CategoryTodays>
-				<CategorySports>
-					{isLoading ? (
-						<div className="flex items-center w-full justify-center">
-							<span className="loading loading-spinner loading-lg"></span>
-						</div>
-					) : (
-						data.data.map((e, i) => {
-							if (e.category.title === "Sport") {
-								return (
-									<Link key={i} href={`/article/article-view/${e.id}`}>
-										<CardArticle
-											className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
-											src={e.banner}
-											title={e.title.substr(0, 15)}
-											description={e.title.substr(0, 90)}
-											like={e.like}
-											publishDate={`3m ago`}
-										/>
-									</Link>
-								)
-							}
-						})
-					)}
-				</CategorySports>
-
-				<CategoryPolitics>
-					{isLoading ? (
-						<div className="flex items-center w-full justify-center">
-							<span className="loading loading-spinner loading-lg"></span>
-						</div>
-					) : (
-						data.data.map((e, i) => {
-							if (e.category.title === "Politics") {
-								return (
-									<Link key={i} href={`/article/article-view/${e.id}`}>
-										<CardArticle
-											className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
-											src={e.banner}
-											title={e.title.substr(0, 15)}
-											description={e.title.substr(0, 90)}
-											like={e.like}
-											publishDate={`3m ago`}
-										/>
-									</Link>
-								)
-							}
-						})
-					)}
-				</CategoryPolitics>
-				<div className="flex items-center justify-center w-full py-20">
-					<button className="btn btn-xs sm:btn-sm md:btn-md lg:btn-lg normal-case text-blueprimary hover:bg-blueprimary/60 border-0 bg-blueprimary/40  w-full h-72">
-						Load Another 30+ Category
-					</button>
-				</div>
-			</CategoryArticle> */}
 
 			<CategoryArticle>
 				{isLoading ? (
@@ -162,59 +57,22 @@ const ArticlePage = () => {
 					</div>
 				) : (
 					<>
-						{data.data.some((e) => e.category.title === "Government") && (
-							<CategoryContent title="Government">
-								{data.data.map((e, i) => {
-									if (e.category.title === "Government") {
-										return (
-											<Link key={i} href={`/article/article-view/${e.id}`}>
-												<CardArticle
-													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
-													src={e.banner}
-													title={e.title.substr(0, 15)}
-													description={e.title.substr(0, 90)}
-													like={e.like}
-													publishDate="3m ago"
-												/>
-											</Link>
-										)
-									}
-								})}
-							</CategoryContent>
-						)}
-
-						{data.data.some((e) => e.category.title === "Todays") && (
-							<CategoryContent title="Today's">
-								{data.data.map((e, i) => {
-									if (e.category.title === "Todays") {
-										return (
-											<Link key={i} href={`/article/article-view/${e.id}`}>
-												<CardArticle
-													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
-													src={e.banner}
-													title={e.title.substr(0, 15)}
-													description={e.title.substr(0, 90)}
-													like={e.like}
-													publishDate="3m ago"
-												/>
-											</Link>
-										)
-									}
-								})}
-							</CategoryContent>
-						)}
-
 						{data.data.some((e) => e.category.title === "Sport") && (
 							<CategoryContent title="Sports">
 								{data.data.map((e, i) => {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
 									if (e.category.title === "Sport") {
 										return (
 											<Link key={i} href={`/article/article-view/${e.id}`}>
 												<CardArticle
 													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
 													src={e.banner}
-													title={e.title.substr(0, 15)}
-													description={e.title.substr(0, 90)}
+													title={titlePreview}
+													description={descriptionPreview}
 													like={e.like}
 													publishDate="3m ago"
 												/>
@@ -225,17 +83,126 @@ const ArticlePage = () => {
 							</CategoryContent>
 						)}
 
-						{data.data.some((e) => e.category.title === "Politics") && (
-							<CategoryContent title="Politics">
+						{data.data.some((e) => e.category.title === "Culinary") && (
+							<CategoryContent title="Culinary">
 								{data.data.map((e, i) => {
-									if (e.category.title === "Politics") {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
+									if (e.category.title === "Culinary") {
 										return (
 											<Link key={i} href={`/article/article-view/${e.id}`}>
 												<CardArticle
 													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
 													src={e.banner}
-													title={e.title.substr(0, 15)}
-													description={e.title.substr(0, 90)}
+													title={titlePreview}
+													description={descriptionPreview}
+													like={e.like}
+													publishDate="3m ago"
+												/>
+											</Link>
+										)
+									}
+								})}
+							</CategoryContent>
+						)}
+
+						{data.data.some((e) => e.category.title === "Health") && (
+							<CategoryContent title="Health">
+								{data.data.map((e, i) => {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
+									if (e.category.title === "Health") {
+										return (
+											<Link key={i} href={`/article/article-view/${e.id}`}>
+												<CardArticle
+													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
+													src={e.banner}
+													title={titlePreview}
+													description={descriptionPreview}
+													like={e.like}
+													publishDate="3m ago"
+												/>
+											</Link>
+										)
+									}
+								})}
+							</CategoryContent>
+						)}
+
+						{data.data.some((e) => e.category.title === "Government") && (
+							<CategoryContent title="Government">
+								{data.data.map((e, i) => {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
+									if (e.category.title === "Government") {
+										return (
+											<Link key={i} href={`/article/article-view/${e.id}`}>
+												<CardArticle
+													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
+													src={e.banner}
+													title={titlePreview}
+													description={descriptionPreview}
+													like={e.like}
+													publishDate="3m ago"
+												/>
+											</Link>
+										)
+									}
+								})}
+							</CategoryContent>
+						)}
+
+						{data.data.some((e) => e.category.title === "Economy") && (
+							<CategoryContent title="Economy">
+								{data.data.map((e, i) => {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
+									if (e.category.title === "Economy") {
+										return (
+											<Link key={i} href={`/article/article-view/${e.id}`}>
+												<CardArticle
+													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
+													src={e.banner}
+													title={titlePreview}
+													description={descriptionPreview}
+													like={e.like}
+													publishDate="3m ago"
+												/>
+											</Link>
+										)
+									}
+								})}
+							</CategoryContent>
+						)}
+
+						{data.data.some((e) => e.category.title === "Transportaion") && (
+							<CategoryContent title="Transportation">
+								{data.data.map((e, i) => {
+									const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+									const descriptionPreview = e.body
+										.split(" ")
+										.slice(0, 10)
+										.join(" ")
+									if (e.category.title === "Transportation") {
+										return (
+											<Link key={i} href={`/article/article-view/${e.id}`}>
+												<CardArticle
+													className="carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray"
+													src={e.banner}
+													title={titlePreview}
+													description={descriptionPreview}
 													like={e.like}
 													publishDate="3m ago"
 												/>

@@ -10,17 +10,27 @@ import SectionArticleByCategory from "@/components/organisms/SectionArticleByCat
 const CategoryIdPage = () => {
 	const { id } = useParams()
 	const { data, isLoading } = useArticleByCategoryQuery(id)
+
 	console.log(data)
 	return (
 		<>
 			<Navbar />
-			<ArticleHeader page_name={`Category`} />
 			{isLoading ? (
 				<div className="flex items-center w-full justify-center">
 					<span className="loading loading-spinner loading-lg"></span>
 				</div>
 			) : (
-				<SectionArticleByCategory />
+				<>
+					<ArticleHeader
+						page_name={
+							data.data.length > 0
+								? data.data[0].category.title
+								: "No Article Found"
+						}
+						sendIcon={null}
+					/>
+					<SectionArticleByCategory />
+				</>
 			)}
 			<Footer />
 		</>

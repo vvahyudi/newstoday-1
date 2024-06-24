@@ -25,7 +25,7 @@ const SectionAvatar = ({ username, job, picture, created_at }) => {
 						{username} - {job}
 					</h4>
 					<span className={`text-sm text-gray-500`}>
-						{moment({ created_at }).format("ddd, DD-MM-YYYY")}
+						{moment({ created_at }).format("LL")}
 					</span>
 				</div>
 			</div>

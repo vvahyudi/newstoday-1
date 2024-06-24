@@ -23,9 +23,15 @@ const SectionCategory1 = ({ moreCategory }) => {
 					</div>
 				) : (
 					data.data.map((e, i) => {
+						const totalArticles = e.article ? e.article.length : 0
 						return (
 							<Link key={i} href={`/category/${e.id}`}>
-								<CardCategory1 src={e.banner} alt={e.title} label={e.title} />
+								<CardCategory1
+									src={e.banner}
+									alt={e.title}
+									label={e.title}
+									totalArticle={totalArticles}
+								/>
 							</Link>
 						)
 					})

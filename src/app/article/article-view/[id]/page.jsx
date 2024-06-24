@@ -3,23 +3,60 @@ import ArticleHeader from "@/components/molecules/ArticleHeader"
 import CardImageArticle from "@/components/molecules/CardImageArticle"
 import Image from "next/image"
 import Navbar from "@/components/organisms/Navbar"
+import { Icon } from "@iconify/react"
 
 import SectionAvatar from "@/components/organisms/SectionAvatar"
 // import ArticleContent from "@/components/organisms/ArticleContent"
 import SectionComment from "@/components/organisms/SectionComment"
 import { nunitoBold } from "@/styles/font"
 import Footer from "@/components/organisms/Footer"
-import {
-	useArticleListQuery,
-	useArticleByIdQuery,
-} from "@/hooks/useArticleQuery"
+import { useArticleByIdQuery } from "@/hooks/useArticleQuery"
+import { useDetailProfileQuery } from "@/hooks/useProfileQuery"
 import { useParams } from "next/navigation"
+import { useState } from "react"
+import { useRouter } from "next/navigation"
+import { useMutation } from "@tanstack/react-query"
+import { createComment } from "@/api/article"
 
 export default function ArticleViewPage() {
 	const { id } = useParams()
-	const { data, isLoading } = useArticleByIdQuery(id)
+	const { data, isLoading, refetch } = useArticleByIdQuery(id)
+	const { data: userDetail, isLoading: isLoadingUserDetail } =
+		useDetailProfileQuery()
 
-	console.log(data)
+	const [form, setForm] = useState({
+		comment: "",
+	})
+	const createCommentMutation = useMutation({
+		mutationFn: createComment,
+	})
+	const onChangeInput = (e) => {
+		setForm({
+			...form,
+			[e.target.name]: e.target.value,
+		})
+	}
+	// console.log(form)
+	const handleSubmitComment = (e) => {
+		e.preventDefault()
+		const body = { comment: form.comment }
+		const payload = { id: id, body: body }
+
+		console.log(body)
+		try {
+			createCommentMutation.mutate(payload, {
+				onSuccess: async (response) => {
+					refetch()
+					// console.error(response)
+				},
+				onError: (error) => {
+					console.error(error)
+				},
+			})
+		} catch (error) {
+			console.error(error)
+		}
+	}
 	// console.log(article)
 	return (
 		<>
@@ -31,7 +68,12 @@ export default function ArticleViewPage() {
 				</div>
 			) : (
 				<section className="flex flex-col justify-center px-20 py-10 w-full">
-					<ArticleHeader page_name={`Article Viewer`} />
+					<ArticleHeader
+						page_name={`Article Viewer`}
+						sendIcon={
+							<Icon icon="bi:send" className="text-black w-9 h-9 font-bold" />
+						}
+					/>
 					<CardImageArticle>
 						<Image
 							src={`${data.data.banner}`}
@@ -64,19 +106,69 @@ export default function ArticleViewPage() {
 							{`${data.data.title}`}
 							{/* {"Image Article"} */}
 						</h1>
-						<p className="prose prose-xl">
-							{`${data.data.body}`}
-							{/* Lorem ipsum dolor sit amet consectetur adipisicing elit.
-							Excepturi, dicta illo vel facere, autem nam soluta quod et
-							deleniti quia eos, ullam tenetur voluptates repellendus quibusdam
-							earum. Laboriosam, repellendus eveniet. Reiciendis sunt
-							perspiciatis ipsum eius ab distinctio nihil omnis, odit, sequi
-							rerum veritatis dignissimos, unde doloremque at? Est ullam,
-							doloribus molestias id perferendis quia, voluptate pariatur
-							commodi veritatis ea eligendi? */}
-						</p>
+						<p className="prose prose-xl">{`${data.data.body}`}</p>
 					</section>
-					<SectionComment />
+					<section className="flex flex-col w-full gap-2 pt-8">
+						<h2 className={`text-2xl ${nunitoBold.className}`}>
+							{data.data.comment.length} Comments
+						</h2>
+						<div className="flex justify-start space-x-2">
+							{isLoadingUserDetail ? (
+								<div className="flex items-center w-full justify-center">
+									<span className="loading loading-spinner loading-lg"></span>
+								</div>
+							) : (
+								<div className="avatar">
+									<div className="rounded-xl w-14 h-14">
+										<Image
+											src={userDetail.data.picture}
+											alt={`Avatar`}
+											width={100}
+											height={100}
+											className="object-cover"
+										/>
+									</div>
+								</div>
+							)}
+							<form action="">
+								<div className="flex flex-col justify-center gap-2 w-full">
+									<h4
+										className={`text-blue-950 ${nunitoBold.className} text-lg`}
+									>
+										You
+									</h4>
+
+									<textarea
+										onChange={onChangeInput}
+										className="textarea textarea-bordered"
+										placeholder="Leave a comment"
+										name="comment"
+									></textarea>
+									<div className="flex items-start">
+										<button
+											type="submit"
+											onClick={handleSubmitComment}
+											className={`btn-sm btn bg-blue-600 normal-case border-0 text-base text-center text-white`}
+										>
+											Submit
+										</button>
+									</div>
+								</div>
+							</form>
+						</div>
+					</section>
+
+					{data.data.comment.map((comment) => (
+						<SectionComment
+							key={comment.id}
+							articleOwnerAvatar={data.data.user.picture}
+							articleOwnerName={data.data.user.username}
+							commentatorAvatar={comment.user.picture}
+							commentatorName={comment.user.username}
+							commentatorDate={comment.createdAt}
+							commentContent={comment.comment}
+						/>
+					))}
 				</section>
 			)}
 

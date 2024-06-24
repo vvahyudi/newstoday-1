@@ -9,7 +9,7 @@ import { useRouter } from "next/navigation"
 // import { useCategoryListQuery } from "@hooks/useCategoryQuery"
 
 const SectionArticleByUser = () => {
-	const { data, isLoading } = useArticleByUserQuery()
+	const { data, isLoading, refetch } = useArticleByUserQuery()
 	const router = useRouter()
 
 	const deleteArticleMutation = useMutation({
@@ -20,7 +20,8 @@ const SectionArticleByUser = () => {
 		try {
 			deleteArticleMutation.mutate(id, {
 				onSuccess: async (response) => {
-					router.push("/profile")
+					// router.push("/profile")
+					refetch()
 				},
 				onError: (error) => {
 					console.error(error)
@@ -42,33 +43,36 @@ const SectionArticleByUser = () => {
 					<div>Loading ...</div>
 				) : (
 					data.data.map((e, i) => {
+						const titlePreview = e.title.split(" ").slice(0, 3).join(" ")
+						const descriptionPreview = e.body.split(" ").slice(0, 10).join(" ")
 						return (
-							<CardArticle
-								key={i}
-								className={`carousel-item card w-full h-36 md:h-52 card-side shadow-md bg-bggray`}
-								src={e.banner}
-								alt={e.title}
-								title={e.title.substr(0, 15)}
-								description={e.title.substr(0, 90)}
-								like={e.like}
-								publishDate={`3m ago`}
-							>
-								<div className="flex w-full justify-between mt-0 -mb-0 md:-mb-6  md:mt-2 text-white">
-									<Link
-										className="btn btn-sm bg-green-500 hover:bg-green-700"
-										href={`article/edit-article/${e.id}`}
-									>
-										Edit
-									</Link>
+							<Link key={i} href={`/article/article-view/${e.id}`}>
+								<CardArticle
+									className={`carousel-item card w-full h-36 md:h-52 card-side shadow-md bg-bggray`}
+									src={e.banner}
+									alt={e.title}
+									title={titlePreview}
+									description={descriptionPreview}
+									like={e.like}
+									publishDate={`3m ago`}
+								>
+									<div className="flex w-full justify-between mt-0 -mb-0 md:-mb-6  md:mt-2 text-white">
+										<Link
+											className="btn btn-sm bg-green-500 hover:bg-green-700"
+											href={`article/edit-article/${e.id}`}
+										>
+											Edit
+										</Link>
 
-									<button
-										className="btn btn-sm bg-red-500 hover:bg-red-700"
-										onClick={handleDeleteArticle(e.id)}
-									>
-										Delete
-									</button>
-								</div>
-							</CardArticle>
+										<button
+											className="btn btn-sm bg-red-500 hover:bg-red-700"
+											onClick={() => handleDeleteArticle(e.id)}
+										>
+											Delete
+										</button>
+									</div>
+								</CardArticle>
+							</Link>
 						)
 					})
 				)}

@@ -1,6 +1,6 @@
 "use client"
 import Navbar from "@/components/organisms/Navbar"
-import React, { useState } from "react"
+import React, { useState, useEffect } from "react"
 import { Icon } from "@iconify/react"
 import { nunitoBold, nunitoMedium } from "@/styles/font"
 import Footer from "@/components/organisms/Footer"
@@ -9,13 +9,14 @@ import { useArticleByIdQuery } from "@/hooks/useArticleQuery"
 import { useMutation } from "@tanstack/react-query"
 import { updateArticle } from "@/api/article"
 import { useParams, useRouter } from "next/navigation"
+import Image from "next/image"
 
 const EditArticlePage = () => {
 	const router = useRouter()
 	const { id } = useParams()
 	const { data: articleDetail, isLoading: isLoadingArticle } =
 		useArticleByIdQuery(id)
-	console.log(articleDetail)
+	// console.log(articleDetail)
 	const [params, setParams] = useState({
 		limit: 10,
 	})
@@ -29,6 +30,17 @@ const EditArticlePage = () => {
 		banner: null,
 		tags: "",
 	})
+	useEffect(() => {
+		if (articleDetail) {
+			setForm({
+				title: articleDetail.data.title,
+				categoryId: articleDetail.data.categoryId,
+				body: articleDetail.data.body,
+				banner: articleDetail.data.banner,
+				tags: articleDetail.data.tags,
+			})
+		}
+	}, [articleDetail])
 	const updateArticleMutation = useMutation({
 		mutationFn: updateArticle,
 	})
@@ -98,10 +110,20 @@ const EditArticlePage = () => {
 						<div className="flex w-full space-x-8">
 							<div className="w-4/12 rounded-lg border border-1 border-bordergray py-10 px-6 flex flex-col items-center justify-center">
 								<div className="flex flex-col items-center justify-center w-full h-full border-dashed border-2 border-borderygray rounded-xl">
-									<Icon
-										icon="mdi:add-bold"
-										className="w-12 h-12 text-blueprimary"
-									/>
+									{form.banner ? (
+										<Image
+											src={form.banner} // Assuming `form.banner` has a `src` property
+											width={100}
+											height={100}
+											alt={form.banner.alt || "Banner Image"} // Providing a default alt text if not available
+											className="object-fit rounded-lg contrast-50 w-full h-full"
+										/>
+									) : (
+										<Icon
+											icon="mdi:add-bold"
+											className="w-12 h-12 text-blueprimary"
+										/>
+									)}
 								</div>
 							</div>
 							<div className="w-8/12">
@@ -110,7 +132,7 @@ const EditArticlePage = () => {
 										<div className=" w-6/12">
 											<input
 												onChange={onChangeInput}
-												defaultValue={`${articleDetail.data.title}`}
+												value={`${form.title}`}
 												name="title"
 												type="text"
 												placeholder="Article Title"
@@ -125,7 +147,7 @@ const EditArticlePage = () => {
 											) : (
 												<select
 													className="select select-bordered  divide-y w-full"
-													defaultValue={`${articleDetail.data.category.title}`}
+													value={`${form.categoryId}`}
 													name="categoryId"
 													onChange={onChangeInput}
 												>
@@ -173,7 +195,7 @@ const EditArticlePage = () => {
 										<div className="flex w-full">
 											<textarea
 												onChange={onChangeInput}
-												defaultValue={`${articleDetail.data.body}`}
+												value={`${form.body}`}
 												name="body"
 												placeholder="Your content is here"
 												className="textarea textarea-bordered textarea-lg w-full h-96"
@@ -181,7 +203,7 @@ const EditArticlePage = () => {
 										</div>
 										<div className="flex w-full">
 											<input
-												defaultValue={`${articleDetail.data.tags}`}
+												value={`${form.tags}`}
 												onChange={onChangeInput}
 												type="text"
 												name="tags"

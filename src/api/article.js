@@ -82,3 +82,21 @@ export const getArticleByUser = async () => {
 		console.error(error)
 	}
 }
+
+export const createComment = async (payload) => {
+	const token = localStorage.getItem("token")
+	const { id, body } = payload
+
+	try {
+		const response = await axios.post(
+			`${BACKEND_URL}/article/comment/${id}`,
+			body,
+			{
+				headers: { authorization: `${token}` },
+			},
+		)
+		return response.data
+	} catch (error) {
+		console.error(error)
+	}
+}

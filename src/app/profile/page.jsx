@@ -53,26 +53,26 @@ const ProfilePage = () => {
 							/>
 							<div className="flex md:flex-row flex-col  text-white md:gap-2 gap-4 pt-8 md:pt-0">
 								<div className="flex flex-col justify-end ">
-									<button className="btn btn-wide bg-blueprimary hover:bg-blueprimary/85">
+									<button className="btn btn-wide bg-blueprimary hover:bg-textprimary">
 										Message
 									</button>
 								</div>
 								<div className="flex flex-col justify-end">
 									<Link
-										className="btn btn-wide bg-textprimary hover:bg-textprimary/85"
+										className="btn btn-wide bg-textprimary hover:bg-blueprimary"
 										href={`article/write-article`}
 									>
 										Create Article
 									</Link>
 								</div>
 								<div className="flex flex-col justify-end">
-									<button className="btn btn-wide bg-textprimary hover:bg-textprimary/85">
+									<button className="btn btn-wide bg-textprimary hover:bg-blueprimary">
 										Following
 									</button>
 								</div>
 								<div className="flex flex-col justify-end">
 									<Link
-										className="btn btn-wide bg-textprimary hover:bg-textprimary/85"
+										className="btn btn-wide bg-textprimary hover:bg-blueprimary"
 										href={`profile/edit-profile/${data.data.id}`}
 									>
 										Edit

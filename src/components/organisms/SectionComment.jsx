@@ -1,46 +1,23 @@
-import React from "react"
+"use client"
+import React, { useState } from "react"
 import Image from "next/image"
 import { nunitoBold } from "@/styles/font"
+import moment from "moment"
 
-const SectionComment = () => {
+const SectionComment = ({
+	commentatorAvatar,
+	commentatorName,
+	commentDate,
+	commentContent,
+}) => {
 	return (
-		<section className="flex flex-col w-full gap-4 py-10">
-			<h2 className={`text-2xl ${nunitoBold.className}`}>2 Comments</h2>
-			<div className="flex justify-start space-x-2">
-				<div className="avatar">
-					<div className="rounded-xl w-14 h-14">
-						<Image
-							src={`/avatar-placeholder.png`}
-							alt={`Avatar`}
-							width={100}
-							height={100}
-							className="object-cover"
-						/>
-					</div>
-				</div>
-				<div className="flex flex-col justify-center gap-2 w-full">
-					<h4 className={`text-blue-950 ${nunitoBold.className} text-lg`}>
-						You
-					</h4>
-					<textarea
-						className="textarea textarea-bordered"
-						placeholder="Leave a comment"
-					></textarea>
-					<div className="flex items-start">
-						<button
-							className={`btn-sm btn bg-blue-600 normal-case border-0 text-base text-center text-white`}
-						>
-							Submit
-						</button>
-					</div>
-				</div>
-			</div>
+		<section className="flex flex-col w-full gap-4 pt-8">
 			{/* comment */}
 			<div className="flex justify-start space-x-2">
 				<div className="avatar">
 					<div className="rounded-xl w-14 h-14">
 						<Image
-							src={`/avatar-placeholder.png`}
+							src={commentatorAvatar}
 							alt={`Avatar`}
 							width={100}
 							height={100}
@@ -50,11 +27,9 @@ const SectionComment = () => {
 				</div>
 				<div className="flex flex-col justify-start">
 					<h4 className={`text-blue-950 ${nunitoBold.className} text-lg`}>
-						Richard Gervain - 1m ago
+						{commentatorName} - {moment({ commentDate }).format("LL")}
 					</h4>
-					<span className={`text-lg text-black prose`}>
-						Couldn’t agree more!
-					</span>
+					<span className={`text-lg text-black prose`}>{commentContent}</span>
 				</div>
 			</div>
 		</section>
