@@ -10,11 +10,11 @@ const SectionCategory1 = ({ moreCategory }) => {
 	})
 	const { data, isLoading } = useCategoryListQuery(params)
 	return (
-		<section className="flex flex-col w-full p-10">
-			<div className="flex p-10 w-full  items-center justify-center">
-				<h3 className={`text-xl p-4 text-textgray ${nunitoBold.className}`}>
+		<section className="flex flex-col w-full p-8">
+			<div className="flex w-full  items-center justify-center">
+				{/* <h3 className={`text-xl p-4 text-textgray ${nunitoBold.className}`}>
 					{moreCategory}
-				</h3>
+				</h3> */}
 			</div>
 			<div className="grid grid-cols-2 md:grid-cols-3 lg:grid-cols-3 xl:grid-cols-6 md:gap-8 gap-4 place-items-center w-full">
 				{isLoading ? (
@@ -38,7 +38,9 @@ const SectionCategory1 = ({ moreCategory }) => {
 				)}
 			</div>
 			<div className="flex px-10 py-10 w-full  items-center justify-center">
-				<h3 className={`text-xl p-4 text-textgray ${nunitoBold.className}`}>
+				<h3
+					className={` text-center text-xl p-4 text-textgray ${nunitoBold.className}`}
+				>
 					We have no category left
 				</h3>
 			</div>

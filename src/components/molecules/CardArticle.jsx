@@ -24,12 +24,12 @@ export const CardArticle = ({
 					className="object-cover rounded-lg w-40 h-52"
 				/>
 			</figure>
-			<div className="w-72 card-body">
-				<h2 className="card-title text-blueprimary text-base md:text-base lg:text-lg text-wrap">
+			<div className="w-full card-body">
+				<h2 className="card-title text-blueprimary text-sm md:text-base lg:text-lg text-wrap">
 					{title}
 				</h2>
 				<p
-					className={`${nunitoMedium.className} text-wrap text-base md:text-base lg:text-base`}
+					className={`${nunitoMedium.className} text-wrap text-xs md:text-sm lg:text-base`}
 				>
 					{description}
 				</p>
@@ -47,7 +47,7 @@ export const CardArticle = ({
 					</div>
 					<div className="flex items-center gap-1">
 						<Icon
-							icon="material-symbols:thumb-up-outline"
+							icon="material-symbols:nest-clock-farsight-analog-outline-rounded"
 							className="w-4 h-4 lg:w-4 lg:h-4 text-textprimary"
 						/>
 						<span

@@ -67,11 +67,10 @@ export default function ArticleViewPage() {
 					<span className="loading loading-spinner loading-lg"></span>
 				</div>
 			) : (
-				<section className="flex flex-col justify-center px-20 py-10 w-full">
+				<section className="flex flex-col justify-center p-8 w-full">
 					<ArticleHeader
-						page_name={`Article Viewer`}
 						sendIcon={
-							<Icon icon="bi:send" className="text-black w-9 h-9 font-bold" />
+							<Icon icon="bi:send" className="text-black w-6 h-6 font-bold" />
 						}
 					/>
 					<CardImageArticle>
@@ -80,11 +79,11 @@ export default function ArticleViewPage() {
 							alt={`${data.data.title}`}
 							// src={`/bg-hero-article.png`}
 							// alt={"Image Article"}
-							width={500}
-							height={500}
-							className="object-cover max-w-screen-sm"
+							width={480}
+							height={480}
+							className="object-cover max-w-screen-md md:max-w-screen-sm"
 						/>
-						<Image
+						{/* <Image
 							src={`${data.data.banner}`}
 							alt={`${data.data.title}`}
 							// src={`/bg-hero-article.png`}
@@ -92,7 +91,7 @@ export default function ArticleViewPage() {
 							width={500}
 							height={500}
 							className="object-cover max-w-screen-sm"
-						/>
+						/> */}
 					</CardImageArticle>
 					<SectionAvatar
 						picture={data.data.user.picture}
@@ -102,11 +101,11 @@ export default function ArticleViewPage() {
 					/>
 					<section className="flex flex-col w-full gap-4">
 						{/* {JSON.stringify(data)} */}
-						<h1 className={`text-4xl ${nunitoBold.className}`}>
+						<h1 className={`text-xl md:text-4xl ${nunitoBold.className}`}>
 							{`${data.data.title}`}
 							{/* {"Image Article"} */}
 						</h1>
-						<p className="prose prose-xl">{`${data.data.body}`}</p>
+						<p className="prose prose-xl text-sm md:text-lg">{`${data.data.body}`}</p>
 					</section>
 					<section className="flex flex-col w-full gap-2 pt-8">
 						<h2 className={`text-2xl ${nunitoBold.className}`}>
@@ -140,7 +139,7 @@ export default function ArticleViewPage() {
 
 									<textarea
 										onChange={onChangeInput}
-										className="textarea textarea-bordered"
+										className="textarea textarea-bordered w-96"
 										placeholder="Leave a comment"
 										name="comment"
 									></textarea>

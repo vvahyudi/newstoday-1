@@ -21,7 +21,7 @@ const ProfilePage = () => {
 			) : (
 				<>
 					<ProfileHeader username={data.data.username} />
-					<div className="flex flex-col py-10 w-full h-[480px] gap-3 relative">
+					<div className="flex flex-col py-8 w-full h-[480px] gap-3 relative">
 						<Image
 							src={
 								data.data.picture === ""
@@ -37,7 +37,7 @@ const ProfilePage = () => {
 
 						{/* start CardProfile Component */}
 
-						<div className="flex md:flex-row flex-col md:gap-4 items-center md:justify-center absolute inset-x-0 md:bottom-20 bottom-0 gap-2">
+						<div className="flex md:flex-row flex-col md:gap-4 items-center md:justify-center absolute inset-x-0 md:bottom-20 gap-2">
 							<CardProfileInfo
 								src={
 									data.data.picture === ""
@@ -51,28 +51,28 @@ const ProfilePage = () => {
 										: data.data.about
 								}
 							/>
-							<div className="flex md:flex-row flex-col  text-white md:gap-2 gap-4 pt-8 md:pt-0">
-								<div className="flex flex-col justify-end ">
-									<button className="btn btn-wide bg-blueprimary hover:bg-textprimary">
+							<div className="grid grid-cols-2 md:grid-cols-4 text-white md:gap-2 gap-4 py-8 md:pt-0">
+								<div className="flex flex-col justify-end items-center">
+									<button className="btn btn-md w-32 md:btn-wide bg-blueprimary hover:bg-textprimary">
 										Message
 									</button>
 								</div>
-								<div className="flex flex-col justify-end">
+								<div className="flex flex-col justify-end items-center">
 									<Link
-										className="btn btn-wide bg-textprimary hover:bg-blueprimary"
+										className="btn btn-md w-32 md:btn-wide bg-textprimary hover:bg-blueprimary"
 										href={`article/write-article`}
 									>
 										Create Article
 									</Link>
 								</div>
-								<div className="flex flex-col justify-end">
-									<button className="btn btn-wide bg-textprimary hover:bg-blueprimary">
+								<div className="flex flex-col justify-end items-center">
+									<button className="btn btn-md w-32 md:btn-wide bg-textprimary hover:bg-blueprimary">
 										Following
 									</button>
 								</div>
-								<div className="flex flex-col justify-end">
+								<div className="flex flex-col justify-end items-center">
 									<Link
-										className="btn btn-wide bg-textprimary hover:bg-blueprimary"
+										className="btn btn-md w-32 md:btn-wide bg-textprimary hover:bg-blueprimary"
 										href={`profile/edit-profile/${data.data.id}`}
 									>
 										Edit

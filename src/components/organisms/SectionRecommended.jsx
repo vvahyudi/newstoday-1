@@ -13,7 +13,7 @@ const SectionRecommended = () => {
 	})
 	const { data, isLoading } = useArticleListQuery(params)
 	return (
-		<section className="flex flex-col w-full p-10 gap-4">
+		<section className="flex flex-col w-full p-8 gap-4">
 			<div className="flex justify-between">
 				<h2 className={`${nunitoBold.className} text-lg md:text-2xl`}>
 					Recommended

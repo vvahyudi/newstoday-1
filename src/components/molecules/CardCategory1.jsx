@@ -20,7 +20,7 @@ const CardCategory1 = ({ src, alt, label, totalArticle }) => {
 					</h2>
 				</div>
 			</div>
-			<h3 className={`${nunitoBold.className} text-center text-xl`}>{label}</h3>
+			<h3 className={`${nunitoBold.className} text-center text-lg`}>{label}</h3>
 		</div>
 	)
 }

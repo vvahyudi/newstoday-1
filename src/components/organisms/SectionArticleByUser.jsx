@@ -32,7 +32,7 @@ const SectionArticleByUser = () => {
 		}
 	}
 	return (
-		<section className="flex flex-col w-full p-10 gap-4">
+		<section className="flex flex-col w-full p-8 gap-4">
 			<div className="flex justify-between">
 				<h2 className={`${nunitoBold.className} text-lg md:text-2xl`}>
 					My Article
@@ -48,7 +48,7 @@ const SectionArticleByUser = () => {
 						return (
 							<Link key={i} href={`/article/article-view/${e.id}`}>
 								<CardArticle
-									className={`carousel-item card w-full h-36 md:h-52 card-side shadow-md bg-bggray`}
+									className={`carousel-item card w-full h-44 md:h-52 card-side shadow-md bg-bggray`}
 									src={e.banner}
 									alt={e.title}
 									title={titlePreview}

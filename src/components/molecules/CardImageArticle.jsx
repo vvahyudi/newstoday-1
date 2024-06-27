@@ -1,6 +1,6 @@
 const CardImageArticle = ({ children }) => {
 	return (
-		<div className="flex justify-center items-center p-10 gap-4  w-full">
+		<div className="flex-col flex md:flex-row items-center sm:justify-center sm:items-center p-8 gap-4 w-full">
 			{children}
 		</div>
 	)

@@ -42,6 +42,9 @@ const WriteArticlePage = () => {
 			[e.target.name]: e.target.files[0],
 		})
 	}
+	const handleBackClick = () => {
+		router.back()
+	}
 	const handleSubmit = (e) => {
 		e.preventDefault()
 		const formData = new FormData()
@@ -67,29 +70,34 @@ const WriteArticlePage = () => {
 	return (
 		<>
 			<Navbar />
-			<section className="flex flex-col justify-center p-10 gap-8 w-full">
+			<section className="flex flex-col justify-center p-8 gap-8 w-full">
 				<div className="flex justify-between w-full">
-					<div className="flex items-center justify-start">
+					<div
+						className="flex items-center justify-start"
+						onClick={handleBackClick}
+					>
 						<Icon
 							icon="ic:baseline-arrow-back-ios"
 							className="text-textprimary w-6 h-6 font-bold"
 						/>
-						<h3
-							className={`${nunitoMedium.className} text-textprimary text-lg`}
-						>
+						<h3 className={`${nunitoBold.className} text-textprimary text-lg`}>
 							Back
 						</h3>
 					</div>
-					<h2 className={`${nunitoBold.className} text-textprimary text-2xl`}>
-						Write Article
+					<h2
+						className={`${nunitoBold.className} text-textprimary  text-xl md:text-2xl`}
+					>
+						Create Article
 					</h2>
-					<h2 className={`${nunitoBold.className} text-textprimary text-lg`}>
+					<h2
+						className={`${nunitoBold.className} text-textprimary hidden md:block text-lg`}
+					>
 						Save as draft
 					</h2>
 				</div>
 				<form action="">
-					<div className="flex w-full space-x-8">
-						<div className="w-4/12 rounded-lg border border-1 border-bordergray py-10 px-6 flex flex-col items-center justify-center">
+					<div className="flex flex-col-reverse md:flex-row w-full gap-4">
+						<div className="w-full md:w-4/12 rounded-lg border border-1 border-bordergray py-10 px-6 flex flex-col items-center justify-center">
 							<div className="flex flex-col items-center justify-center w-full h-full border-dashed border-2 border-borderygray rounded-xl">
 								<Icon
 									icon="mdi:add-bold"
@@ -97,7 +105,7 @@ const WriteArticlePage = () => {
 								/>
 							</div>
 						</div>
-						<div className="w-8/12">
+						<div className="w-full md:w-8/12">
 							<div className="flex flex-col gap-4">
 								<div className="flex items-center gap-2">
 									<div className=" w-6/12">
@@ -167,7 +175,7 @@ const WriteArticlePage = () => {
 											onChange={onChangeInput}
 											name="body"
 											placeholder="Your content is here"
-											className="textarea textarea-bordered textarea-lg w-full h-96"
+											className="textarea textarea-bordered text-sm textarea-lg w-full h-96"
 										></textarea>
 									</div>
 									<div className="flex w-full">
@@ -187,7 +195,7 @@ const WriteArticlePage = () => {
 						<div className="w-4/12">
 							<label
 								htmlFor="banner"
-								className="btn btn-lg normal-case w-full bg-textprimary rounded-lg hover:bg-blueprimary text-white"
+								className="btn btn-md md:btn-lg normal-case w-full bg-textprimary rounded-lg hover:bg-blueprimary text-white"
 							>
 								Choose Cover Photo
 							</label>
@@ -203,7 +211,7 @@ const WriteArticlePage = () => {
 							<button
 								onClick={handleSubmit}
 								type="submit"
-								className="btn w-full bg-blueprimary hover:bg-textprimary normal-case text-white btn-lg"
+								className="btn w-full bg-blueprimary hover:bg-textprimary normal-case text-white btn-md md:btn-lg"
 							>
 								Request Publish Article
 							</button>
