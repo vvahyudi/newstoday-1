@@ -86,7 +86,7 @@ export default function ArticleViewPage() {
 							// alt={"Image Article"}
 							width={480}
 							height={480}
-							className="object-cover max-w-screen-md md:max-w-screen-sm"
+							className="object-cover max-w-96 md:max-w-screen-sm"
 						/>
 						{/* <Image
 							src={`${data.data.banner}`}
@@ -145,7 +145,7 @@ export default function ArticleViewPage() {
 
 										<textarea
 											onChange={onChangeInput}
-											className="textarea textarea-bordered w-96"
+											className="textarea textarea-bordered max-w-screen-md"
 											placeholder="Leave a comment"
 											name="comment"
 										></textarea>
