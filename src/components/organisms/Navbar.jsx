@@ -37,12 +37,6 @@ const Navbar = ({ src }) => {
 							className={`menu menu-horizontal px-1 text-lg text-textprimary`}
 						>
 							<li>
-								<Link className={`${nunitoBold.className}`} href={`/home`}>
-									Home
-								</Link>
-							</li>
-
-							<li>
 								<Link href={`/article`}>Articles</Link>
 							</li>
 							<li>
@@ -96,11 +90,7 @@ const Navbar = ({ src }) => {
 								<li>
 									<Link className="justify-between" href={`/profile`}>
 										Profile
-										<span className="badge">New</span>
 									</Link>
-								</li>
-								<li>
-									<Link href={`/home`}>Home</Link>
 								</li>
 
 								<li>
