@@ -28,9 +28,7 @@ export const CardArticle = ({
 				<h2 className="card-title text-blueprimary text-sm md:text-base lg:text-lg text-wrap">
 					{title}
 				</h2>
-				<p
-					className={`${nunitoMedium.className} text-wrap text-xs md:text-sm lg:text-base`}
-				>
+				<p className={`${nunitoMedium.className} text-wrap text-xs md:text-sm`}>
 					{description}
 				</p>
 				<div className="card-actions justify-between items-center">

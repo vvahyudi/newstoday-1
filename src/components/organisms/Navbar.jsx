@@ -23,7 +23,7 @@ const Navbar = ({ src }) => {
 	return (
 		<>
 			{token ? (
-				<div className="navbar bg-white border-b-2 border-bggray mb-8">
+				<div className="navbar bg-white border-b-2 border-bggray px-8 mb-8">
 					<div className="navbar-start flex-1 w-1/3">
 						<Link
 							href={`/`}
@@ -122,8 +122,8 @@ const Navbar = ({ src }) => {
 					</div>
 				</div>
 			) : (
-				<nav className="navbar bg-white shadow-xl">
-					<div className="navbar-start">
+				<nav className="navbar bg-white shadow-xl w-full px-8">
+					<div className="navbar-start w-1/3">
 						<div className="dropdown">
 							<label tabIndex={0} className="btn btn-ghost lg:hidden">
 								<Icon
@@ -168,7 +168,7 @@ const Navbar = ({ src }) => {
 							News Today
 						</a>
 					</div>
-					<div className="navbar-center hidden lg:flex">
+					<div className="navbar-center w-1/3 mx-8 hidden md:block">
 						<ul
 							className={`menu menu-horizontal px-1 text-lg text-textprimary`}
 						>
@@ -190,7 +190,7 @@ const Navbar = ({ src }) => {
 							</li>
 						</ul>
 					</div>
-					<div className="hidden md:block navbar-start ml-10 space-x-4">
+					<div className="hidden md:block navbar-end w-1/3 space-x-8">
 						<Link
 							className={`text-lg ${nunitoBold.className} text-textprimary`}
 							href={`/signup`}
