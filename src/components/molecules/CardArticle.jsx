@@ -25,7 +25,7 @@ export const CardArticle = ({
 				/>
 			</figure>
 			<div className="w-full card-body">
-				<h2 className="card-title text-blueprimary text-sm md:text-base lg:text-lg text-wrap">
+				<h2 className="card-title text-blueprimary text-sm md:text-base text-wrap">
 					{title}
 				</h2>
 				<p className={`${nunitoMedium.className} text-wrap text-xs md:text-sm`}>
