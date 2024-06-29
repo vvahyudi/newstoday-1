@@ -153,7 +153,7 @@ export default function ArticleViewPage() {
 											<button
 												type="submit"
 												onClick={handleSubmitComment}
-												className={`btn-sm btn bg-blue-600 normal-case border-0 text-base text-center text-white`}
+												className={`btn-sm btn bg-blueprimary hover:bg-textprimary normal-case border-0 text-base text-center text-white`}
 											>
 												Submit
 											</button>
