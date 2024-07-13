@@ -1,3 +1,4 @@
+import { Toaster } from "react-hot-toast"
 import "../styles/globals.css"
 import TanstackProvider from "@/providers/TanstackProvider"
 export const metadata = {
@@ -9,6 +10,7 @@ export const metadata = {
 export default function RootLayout({ children }) {
 	return (
 		<html lang="en">
+			<Toaster position="top-center" reverseOrder={false} />
 			<TanstackProvider>
 				<body>{children}</body>
 			</TanstackProvider>

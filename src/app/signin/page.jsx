@@ -1,4 +1,5 @@
 "use client"
+import toast from "react-hot-toast"
 import { useState } from "react"
 import { nunitoBlack, nunitoBold, nunitoMedium } from "@/styles/font"
 import Image from "next/image"
@@ -18,12 +19,7 @@ const SignIn = () => {
 	const loginMutation = useMutation({
 		mutationFn: signin,
 	})
-	// const onChangeInput = (e) => {
-	// 	setForm({
-	// 		...form,
-	// 		[e.target.name]: e.target.value,
-	// 	})
-	// }
+
 	const handleSubmit = async (e) => {
 		e.preventDefault()
 		try {
@@ -34,8 +30,21 @@ const SignIn = () => {
 					await updateToken(token)
 					router.push("/")
 				},
-				onError: (error) => {
-					console.error(error)
+				onError: async (error) => {
+					if (error.response) {
+						// Server responded with an error status code
+						if (error.response.status === 401) {
+							toast.error("Invalid email or password")
+						} else {
+							toast.error("An error occurred during login")
+						}
+					} else if (error.request) {
+						// The request was made but no response was received
+						toast.error("No response from server. Please try again.")
+					} else {
+						// Something happened in setting up the request that triggered an Error
+						toast.error("Invalid email or password")
+					}
 				},
 			})
 		} catch (error) {
@@ -45,12 +54,13 @@ const SignIn = () => {
 	return (
 		<>
 			<section className="flex flex-col md:flex-row">
-				<div className="flex w-full md:w-1/2 ">
+				<div className=" w-full hidden md:w-1/2 md:block">
 					<Image
 						src="/loginImage.png"
 						width={1000}
 						height={1000}
 						alt="Login Image"
+						priority
 					/>
 				</div>
 				<div className="flex flex-col p-24 gap-4 w-full md:w-1/2">
@@ -69,6 +79,7 @@ const SignIn = () => {
 								onChange={(e) => setForm({ ...form, email: e.target.value })}
 								placeholder="Enter your email address"
 								className="bg-white rounded-lg border border-1 border-bordergray text-xs md:text-base p-3"
+								autoComplete="Your Email"
 							/>
 						</div>
 						<div className="flex-col flex gap-2">
@@ -79,6 +90,7 @@ const SignIn = () => {
 								onChange={(e) => setForm({ ...form, password: e.target.value })}
 								placeholder="Enter your password"
 								className="bg-white rounded-lg border border-1 border-bordergray text-xs md:text-base p-3"
+								autoComplete="Your password"
 							/>
 						</div>
 						<div className="flex-col flex gap-2">
